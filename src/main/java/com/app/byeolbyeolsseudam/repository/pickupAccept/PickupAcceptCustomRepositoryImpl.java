@@ -9,6 +9,7 @@ import com.app.byeolbyeolsseudam.repository.pickup.PickupRepository;
 import com.app.byeolbyeolsseudam.type.PickupStatus;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -42,6 +43,9 @@ public class PickupAcceptCustomRepositoryImpl implements PickupAcceptCustomRepos
                 .fetch();
 
     }
+
+
+
 
     @Override
     public List<PickupDTO> findAllByMyPickup(Long memberId) {

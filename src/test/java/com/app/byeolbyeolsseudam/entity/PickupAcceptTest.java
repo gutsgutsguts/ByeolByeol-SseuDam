@@ -60,23 +60,25 @@ public class PickupAcceptTest {
         recyclable.setGlassCount(10);
 
 
-        pickupDTO.setPetCount(recyclable.getPetCount());
-        pickupDTO.setGlassCount(recyclable.getGlassCount());
-        pickupDTO.setPickupStatus(PickupStatus.수거대기중);
-        pickupDTO.setPickupMessage("수거해줘");
-        pickupDTO.setPickupAddress("우리집은비밀이야");
+        for (int i = 1; i <= 20; i++) {
+            pickupDTO.setPetCount(recyclable.getPetCount());
+            pickupDTO.setGlassCount(recyclable.getGlassCount());
+            pickupDTO.setPickupStatus(PickupStatus.수거대기중);
+            pickupDTO.setPickupMessage("수거해줘");
+            pickupDTO.setPickupAddress("서울 강동구 길동 1234");
 
-        Pickup pickup = pickupDTO.toEntity();
+            Pickup pickup = pickupDTO.toEntity();
 
-        pickup.changeMember(memberRepository.findById(1L).get());
-        pickupRepository.save(pickup);
+            pickup.changeMember(memberRepository.findById(1L).get());
+            pickupRepository.save(pickup);
+        }
 
 
 
-        PickupAccept pickupAccept2 = new PickupAccept();
-        pickupAccept2.changeMember(memberRepository.findById(2L).get());
-        pickupAccept2.changePickup(pickup);
-        pickupAcceptRepository.save(pickupAccept2);
+//        PickupAccept pickupAccept2 = new PickupAccept();
+//        pickupAccept2.changeMember(memberRepository.findById(2L).get());
+//        pickupAccept2.changePickup(pickup);
+//        pickupAcceptRepository.save(pickupAccept2);
 
     }
 
@@ -154,10 +156,12 @@ public class PickupAcceptTest {
 
     @Test
     public void Service2(){
+//            pickupService2.UpdateAndSave( 3L, 2L);
+//        pickupAcceptRepository.findAllByMemberMemberIdAndPickup_PickupStatus_수거중(2,)
 
-//        pickupService2.UpdateAndSave(7L, 5L);
+//        pickupService2.CompleteAndSave(7L);
 
-        pickupService2.CompleteAndSave(7L);
+        log.info(pickupService2.getMyPickupList(2L).toString());
     }
 
 

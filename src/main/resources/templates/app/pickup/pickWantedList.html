@@ -106,6 +106,39 @@
                     </tbody>
 
 
+                    <nav style="text-align: center;">
+                        <ul class="pagination"
+                            th:with="start=${T(Math).floor(pickups.number/10)*10 + 1},
+                    last=(${start + 9 < pickups.totalPages ? start + 9 : pickups.totalPages})">
+                            <li>
+                                <a th:href="@{/pickup(page=1)}" aria-label="First">
+                                    <span aria-hidden="true">First</span>
+                                </a>
+                            </li>
+
+                            <li th:class="${pickups.first} ? 'disabled'">
+                                <a th:href="${pickups.first} ? '#' :@{/pickup(page=${pickups.number})}" aria-label="Previous">
+                                    <span aria-hidden="true">&lt;</span>
+                                </a>
+                            </li>
+
+                            <li th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == pickups.number + 1} ? 'active'">
+                                <a th:text="${page}" th:href="@{/pickup(page=${page})}"></a>
+                            </li>
+
+                            <li th:class="${pickups.last} ? 'disabled'">
+                                <a th:href="${pickups.last} ? '#' : @{/pickup(page=${pickups.number + 2})}" aria-label="Next">
+                                    <span aria-hidden="true">&gt;</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a th:href="@{/pickup(page=${pickups.totalPages})}" aria-label="Last">
+                                    <span aria-hidden="true">Last</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
 <!--                    <li data-v-564412cd="" class="quote-list-item col-md-6 col-lg-4 col-12">-->
 <!--                        <div data-v-05822788="" data-v-564412cd="" data-testid="request-card" class="request-card">-->
 <!--                            <div data-v-05822788="" class="request-card-header align-items-center">-->

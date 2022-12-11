@@ -23,6 +23,7 @@ public class JoinServiceImpl implements JoinService {
         memberDTO.setMemberName(memberDTO.getMemberName());
         memberDTO.setMemberEmail(memberDTO.getMemberEmail());
         memberDTO.setMemberPassword(memberDTO.getMemberPassword());
+        memberDTO.setMemberPoint(3000);
         memberRepository.save(memberDTO.toEntity());
     }
 
@@ -34,6 +35,7 @@ public class JoinServiceImpl implements JoinService {
         memberDTO.setMemberEmail(memberDTO.getMemberEmail());
         memberDTO.setMemberPassword(memberDTO.getMemberPassword());
         memberDTO.setMemberAddress(memberDTO.getMemberAddress());
+        memberDTO.setMemberPoint(3000);
         memberRepository.save(memberDTO.toEntity());
 
     }

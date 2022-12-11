@@ -89,7 +89,16 @@ function matchPw() {
 }
 //이메일 중복 확인
 function checkEmailDuplication() {
-    if ($inputEmail.val() == "hds1234@gmail.com") {
+    const memberEmail = $("#memberEmail").val();
+    $.ajax({
+        url: "/join/checkEmail",
+        type: "get",
+        data: {memberEmail: memberEmail},
+        contentType: "application/json; charset=utf-8",
+        success: function (result) {
+            console.log("AJAX 들어옴" + result);
+
+    if (result) {
         $inputEmail.addClass("is-invalid")
         $inputEmail.parent().siblings(".invalid-feedback").find(".error").css("display", "block")
         $inputEmail.parent().siblings(".invalid-feedback").find(".error").css("color", "#fa5963")
@@ -106,7 +115,11 @@ function checkEmailDuplication() {
         $inputEmail.parent().siblings(".invalid-feedback").find(".error").text("사용 가능한 이메일 주소입니다.")
         emailDuplicate = true;
         return true;
-    }
+             }
+
+        }
+    })
+
 }
 
 
@@ -157,6 +170,7 @@ $selectedGender.on("click", function () {genderCheck($(this))});
 $inputEmail.on("blur", function () {idCheck()});
 $inputPw.on("blur", function () {pwCheck()});
 $pwChecking.on("blur", function () {matchPw()});
+
 $inputPhone.on("blur", function () {phoneCheck()});
 $inputPhone.on("focus", function () {
     if(!$(this).val()){
@@ -199,7 +213,7 @@ $btn.on("click", function () {
     email = idCheck() ? !email : email;
     pw = pwCheck() ? !pw : pw;
     pwc = matchPw() ? !pwc : pwc;
-    phoneCheck();
+    // phoneCheck();
 
     if(!emailDuplicate){
         $inputEmail.addClass("is-invalid")
@@ -213,7 +227,7 @@ $btn.on("click", function () {
     $moreThan14Check ? $moreThan14Error.css("display", "none") : $moreThan14Error.css("display", "block")
 
 
-    if(gender && email && pw && pwc && emailDuplicate && verify && $agreeCheck && $moreThan14Check){
+    if(gender && email && pw && pwc && emailDuplicate && $agreeCheck && $moreThan14Check){
         $btn.attr("type", "submit");
     }
 })
@@ -227,6 +241,7 @@ $passwordShow.on("click", function () {
         $(this).siblings().attr("type", "password");
     }
 })
+
 //증복확인 버튼 누르면 작동
 $duplicationCheckBtn.on("click", function () {
     checkEmailDuplication();

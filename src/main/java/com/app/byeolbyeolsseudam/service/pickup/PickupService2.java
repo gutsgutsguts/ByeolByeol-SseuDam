@@ -9,6 +9,10 @@ import com.app.byeolbyeolsseudam.repository.pickup.PickupRepository;
 import com.app.byeolbyeolsseudam.repository.pickupAccept.PickupAcceptCustomRepository;
 import com.app.byeolbyeolsseudam.repository.pickupAccept.PickupAcceptRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +29,24 @@ public class PickupService2 {
     public List<PickupDTO> getPickupList(){
         return pickupAcceptCustomRepository.findAllByPickupStatus();
     }
+
+//    //    픽업 목록들2
+//    public Page<Pickup> getPickupList2(Pageable pageable){
+//        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+//        pageable = PageRequest.of(page, 9);
+//
+//        return pickupRepository.find
+//    }
+
+//    //    픽업 목록들3
+//    public Page<PickupDTO> getPickupList3(Pageable pageable){
+//        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+//        pageable = PageRequest.of(page, 9);
+//
+//        return pickupAcceptCustomRepository.findAllByPickupStatus3(pageable);
+//
+//    }
+
 
     //    내가 진행중인 목록들
     public List<PickupDTO> getMyPickupList(Long memberId){
